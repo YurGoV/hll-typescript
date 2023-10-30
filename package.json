@@ -1,0 +1,25 @@
+{
+  "name": "learn-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".eslintrc.js",
+  "type": "commonjs",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.3.0",
+    "eslint": "^8.52.0",
+    "eslint-config-airbnb-typescript": "^17.1.0",
+    "eslint-plugin-import": "^2.29.0",
+    "ts-node": "^10.9.1"
+  },
+  "dependencies": {
+    "eslint-plugin-node": "^11.1.0",
+    "lint-staged": "^15.0.2"
+  }
+}
