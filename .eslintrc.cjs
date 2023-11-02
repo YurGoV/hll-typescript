@@ -10,7 +10,7 @@ module.exports = {
     project: './tsconfig.eslint.json',
   },
   // extends: ['airbnb-typescript/base', 'eslint:recommended', 'prettier'],
-  extends: ['airbnb-typescript/base', 'eslint:recommended' ],
+  extends: ['airbnb-typescript/base', 'eslint:recommended'],
   // plugins: ['prettier'],
   rules: {
     'ban-types': 'off',
@@ -19,6 +19,7 @@ module.exports = {
     // 'explicit-function-return-type': ['warn'],
     '@typescript-eslint/explicit-function-return-type': 'warn',
     '@typescript-eslint/no-unused-vars': 'warn',
+    '@typescript-eslint/comma-dangle': ['error', 'only-multiline'],
     // 'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'import/no-extraneous-dependencies': [0],
     'import/extensions': [0],
