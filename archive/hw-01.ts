@@ -129,9 +129,9 @@ class Group {
   }
 
   showPerformance(): Student[] {
-    // const sortedStudents = this._students.toSorted(
+    const sortedStudents = this._students.toSorted(
     // NOTE: ???  error: 1. Property 'toSorted' does not exist on type 'Student[]'. [2339]
-    const sortedStudents = this._students.sort(
+    // const sortedStudents = this._students.sort(
       (a, b) => b.getPerformanceRating() - a.getPerformanceRating(),
     );
 
