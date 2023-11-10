@@ -1,21 +1,21 @@
-interface IRequest {
+interface IRequestOld {
   sum: number;
   from: number;
   to: number;
 }
 
-enum Status {
-  Success = 'success',
-  Failed = 'failed',
-}
+type StatusOld = 'success' | 'failed';
 
-interface IStatus {
-  status: Status;
+interface IStatus<S extends StatusOld> {
+  status: S;
 }
 
 interface ISuccessData {
-  data: IRequest & {
+  data: {
     databaseId: number;
+    sum: number;
+    from: number;
+    to: number;
   };
 }
 
@@ -26,21 +26,21 @@ interface IErrorData {
   };
 }
 
-interface ISuccessResponse extends ISuccessData, IStatus {
-  status: Status.Success;
+interface ISuccessResponse extends ISuccessData, IStatus<'success'> {
 }
 
-interface IErrorResponse extends IErrorData, IStatus {
-  status: Status.Failed;
+interface IErrorResponse extends IErrorData, IStatus<'failed'> {
 }
 
-type InputValidate = IErrorResponse | ISuccessResponse;
+type InputValidateOld = IErrorResponse | ISuccessResponse;
 
 // CHECK:
 
-const response1: InputValidate = { // ok
-  // status: 'success', // err: Type '"success"' is not assignable to type 'Status'.
-  status: Status.Success,
+interface ICheckForValidStatus extends IErrorData, IStatus<'unsuccess'> { // error
+}
+
+const response1old: InputValidateOld = { // ok
+  status: 'success',
   data: {
     databaseId: 567,
     sum: 10000,
@@ -49,18 +49,16 @@ const response1: InputValidate = { // ok
   },
 };
 
-const response2: InputValidate = { // ok
-  // status: 'failed', // err: Type '"failed"' is not assignable to type 'Status
-  status: Status.Failed, 
+const response2old: InputValidateOld = { // ok
+  status: 'failed',
   data: {
     errorMessage: 'Недостаточно средств',
     errorCode: 4,
   },
 };
 
-const response3: InputValidate = {
-  // status: 'failed', // err: Type '"failed"' is not assignable to type 'Status
-  status: Status.Failed,
+const response3old: InputValidateOld = {
+  status: 'failed',
   data: {
     databaseId: 567, // error
     sum: 10000,
@@ -69,22 +67,21 @@ const response3: InputValidate = {
   },
 };
 
-const response4: InputValidate = {
-  // status: 'success', // err: Type '"success"' is not assignable to type 'Status'.
-  status: Status.Success,
+const response4old: InputValidateOld = {
+  status: 'success',
   data: {
     errorMessage: 'Недостаточно средств', // error
     errorCode: 4,
   },
 };
 
-const request1: IRequest = { // ok
+const request1old: IRequestOld = { // ok
   sum: 1000,
   from: 2,
   to: 4,
 };
 
-const request2: IRequest = {
+const request2old: IRequestOld = {
   sum: '1000', // error
   from: 2,
   to: 4,
