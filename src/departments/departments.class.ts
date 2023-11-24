@@ -26,10 +26,10 @@ export class Department implements IDepartment {
       this.workersList.push(worker);
       this.budget.debit -= worker.salary;
       this.budget.credit += worker.salary;
-      // TODO: enum
       accounting.removePreWorkerFromBallance(worker);
       worker.changeStatus('on-job');
       worker.setDepartment(this.name);
+      worker.setSalary(worker.salary + worker.salary * 0.15);
     } else {
       console.error(`Error: chek if ${worker.fullName} is exists or budget compatibility`);
     }
@@ -40,7 +40,6 @@ export class Department implements IDepartment {
       this.workersList = this.workersList.filter((name) => name !== worker);
       this.budget.debit += worker.salary;
       this.budget.credit -= worker.salary;
-      // TODO: enum
       accounting.addPreWorkerToBallance(worker);
       worker.setDepartment(null);
     } else {

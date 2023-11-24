@@ -21,7 +21,6 @@ export class Accounting implements IAccounting {
       this.preWorkersBallance.push(worker);
       this.budget.debit -= worker.salary;
       this.budget.credit += worker.salary;
-      // TODO: enum
       worker.changeStatus('pre-worker');
     } else {
       console.error(`Error: chek if ${worker.fullName} is no exists or budget compatibility`);
@@ -33,7 +32,6 @@ export class Accounting implements IAccounting {
       this.preWorkersBallance = this.preWorkersBallance.filter((name) => name !== worker);
       this.budget.debit += worker.salary;
       this.budget.credit -= worker.salary;
-      // TODO: enum
       worker.changeStatus('on-bench');
     } else {
       console.error(`Worker ${worker} does not exist in the department`);

@@ -28,7 +28,7 @@ export class Worker implements IWorker {
 
   setSalary(newSalary: number): void {
     if (newSalary < this._salary) {
-      console.error('company politic no approve to decrease salary');
+      console.error('ERROR: company politic no approve to decrease salary');
     }
     this._salary = newSalary;
   }
