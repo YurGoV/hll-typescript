@@ -22,7 +22,7 @@ fDepartment.addWorker(workerIrina);
 console.log(fDepartment.getBudgetSummary(), 'fDepartment getBudgetSummary - 2');
 console.log(fDepartment.getWorkersList(), 'fDepartment getWorkersList - 2');
 
-accounting.paySallary();
+accounting.paySalary();
 
 console.log(workerMukuta, 'workerMukuta - 2');
 console.log(workerIrina, 'workerIrina - 2');
