@@ -74,12 +74,16 @@ enum ESort {
   DESC = -1,
 }
 
-function sortEntities<TObj extends IObjWithId, NSort extends ESort>(
-  obj: TObj[],
-  sort: NSort,
-): TObj[] {
+function sortEntities(obj: IObjWithId[], sort: ESort): IObjWithId[] {
   return [...obj].sort((a, b) => (a.id - b.id) * sort);
 }
+
+// function sortEntities<TObj extends IObjWithId, NSort extends ESort>(
+//   obj: TObj[],
+//   sort: NSort,
+// ): TObj[] {
+//   return [...obj].sort((a, b) => (a.id - b.id) * sort);
+// }
 
 const entities: IObjWithId[] = [
   { id: 3 },
