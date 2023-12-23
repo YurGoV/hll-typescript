@@ -3,7 +3,9 @@
 // що повертається з функції. Як параметр типу повинен обов'язково
 // виступати функціональний тип.
 
-type ConditionalType<T> = T extends (...args: any[]) => any ? ReturnType<T> : 'error, must be a function';
+type ConditionalType<T> = T extends (...args: infer Args) => infer Result ? Args extends any[] ? Result
+  : never
+  : 'error: must be a function';
 
 function exampleFunctionOne(): number {
   return 42;
@@ -35,7 +37,9 @@ console.log(resultThree);
 // з одним параметром (або задовільним) та повертає кортеж,
 // де перше значення - це тип, що функція повертає, а другий - тип її параметру
 
-type FunctionInfo<T> = T extends (...args: any) => any ? [Parameters<T>[0], ReturnType<T>]
+type FunctionInfo<T> = T extends (...args: infer Args) => infer Result
+  ? Args extends [infer FirstParam, ...any[]] ? [FirstParam, Result]
+    : never
   : never;
 
 function functOne(value: string): number {
