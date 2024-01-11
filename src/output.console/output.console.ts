@@ -38,6 +38,27 @@ class PrintAsTableProvider implements IOutputProvider {
   }
 }
 
+class PrintAsStringProvider implements IOutputProvider {
+  initialize(): void {
+    // Initialization logic if needed
+  }
+
+  outputNotes(notesToOutput: INote | INote[]): void {
+    // console.log('Printing notes as strings:');
+    if (Array.isArray(notesToOutput)) {
+      notesToOutput.forEach((note: INote) => this.printSingleNoteAsString(note));
+    } else {
+      this.printSingleNoteAsString(notesToOutput);
+    }
+  }
+
+  private printSingleNoteAsString(note: INote): void {
+    console.log(
+      `ID: ${note.id}, Title: ${note.title}, Task: ${note.task}, IsDone: ${note.isDone}, CreatedAt: ${note.createdAt}, UpdatedAt: ${note.updatedAt}`,
+    );
+  }
+}
+
 class OutputNotesToConsole {
   readonly #provider: IOutputProvider;
 
@@ -53,4 +74,8 @@ class OutputNotesToConsole {
 
 export const printNotesAsTable = new OutputNotesToConsole(
   new PrintAsTableProvider(),
+);
+
+export const printSingleNote = new OutputNotesToConsole(
+  new PrintAsStringProvider(),
 );

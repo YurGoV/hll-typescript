@@ -1,6 +1,6 @@
-import { INotes } from './notes.interface';
+import { INote, INotes } from './notes.interface';
 
 export interface IOutputProvider {
-  outputNotes(notes: INotes): void;
+  outputNotes(notes: INote | INotes): void;
   initialize(): void;
 }
