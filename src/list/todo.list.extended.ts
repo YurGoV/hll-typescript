@@ -1,8 +1,5 @@
-import { INote, INotes } from '../interfaces/notes.interface';
-import { printNotesAsTable } from '../output.console/output.console';
+import { INotes } from '../interfaces/notes.interface';
 import { ToDoList } from './todo.list';
-
-const clc = require('cli-color');
 
 export class ExtendedToDoList extends ToDoList {
   constructor(notes: INotes = []) {
@@ -19,7 +16,6 @@ export class ExtendedToDoList extends ToDoList {
   }
 
   sortNotesByStatus(): INotes {
-    // this.notes.sort((a, b) => (a.isDone === b.isDone ? 0 : a.isDone ? 1 : -1));
     return this.notes.sort((a, b) =>
       a
         .isDone
@@ -32,5 +28,3 @@ export class ExtendedToDoList extends ToDoList {
     return this.notes.sort((a, b) => b.createdAt - a.createdAt);
   }
 }
-
-// export { ExtendedToDoList };

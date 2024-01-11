@@ -1,14 +1,8 @@
-import { type } from 'os';
 import { notes } from './data/notes';
-import { ToDoList } from './list/todo.list';
-
-import { printNotesAsTable } from './output.console/output.console';
 import { message } from './data/messages.text';
 import { CreateNoteDto } from './dto/create.note.dto';
 import { ExtendedToDoList } from './list/todo.list.extended';
-// import { printNotes } from './print.notes/print.notes';
 
-// const path = require('path');
 const clc = require('cli-color');
 
 const readline = require('readline');
@@ -20,14 +14,7 @@ const rl = readline.createInterface({
 
 console.log(figlet.textSync('Todo List App'));
 
-// const list = new ToDoList(notes);
 const list = new ExtendedToDoList(notes);
-
-// const introOne = 'Please choose:\n1- print all notes\n';
-// const introTwo = '2- add note\n';
-// const introThree = '3- exit app\n';
-// const askTitle = 'please enter the note title..\n';
-// const askTask = 'please enter the note task..\n';
 
 const askQuestion = (question: string): Promise<string> =>
   new Promise((resolve) => {
@@ -36,7 +23,6 @@ const askQuestion = (question: string): Promise<string> =>
     });
   });
 
-// const app = (): void => {
 const app = async (): Promise<void> => {
   let continueApp = true;
   try {
@@ -68,7 +54,6 @@ const app = async (): Promise<void> => {
         const query = await askQuestion(message.askQuery);
         const result = list.searchNotes(query);
         if (result.length > 0) {
-          // console.log(clc.yellow(result));
           list.printNotes(result);
         } else {
           console.log(clc.red('there is no notes finded..'));
@@ -76,7 +61,6 @@ const app = async (): Promise<void> => {
       } else if (Number(userChoice) === 6) {
         const result = list.sortNotesByStatus();
         if (result) {
-          // console.log(clc.yellow(note));
           list.printNotes(result);
         } else {
           console.log(clc.red('there is no notes..'));
@@ -118,5 +102,3 @@ const app = async (): Promise<void> => {
 };
 
 app();
-
-// https://www.npmjs.com/package/cli-color

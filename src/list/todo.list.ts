@@ -2,14 +2,11 @@ const clc = require('cli-color');
 import { INote, INotes } from '../interfaces/notes.interface';
 import { notes as defaultNotes } from '../data/notes';
 import { printNotesAsTable, printSingleNote } from '../output.console/output.console';
-// import { printNotesAsTable } from('../output.console/output.console');
 
 export class ToDoList {
-  // private notes: INotes = [...defaultNotes];
   protected notes: INotes;
 
   constructor(notes: INotes = []) {
-    // this.notes = defaultNotes;
     this.notes = [...defaultNotes];
   }
 
@@ -31,15 +28,12 @@ ${completedNotesQuantity} of them is completed, rest (${uncompletedNotesQuantity
   }
 
   findNoteById(id: string): INote | null {
-    // this.notes.push(newNote);
     const noteInListIndex = this.notes.findIndex((note) => note.id === id);
-    // console.log(noteInListIndex, 'nili');
 
     return noteInListIndex >= 0 ? this.notes[noteInListIndex]! : null;
   }
 
   markNoteAsDone(id: string): boolean {
-    // this.notes.push(newNote);
     const noteInListIndex = this.notes.findIndex((note) => note.id === id);
     if (noteInListIndex < 0) {
       return false;
@@ -59,7 +53,6 @@ ${completedNotesQuantity} of them is completed, rest (${uncompletedNotesQuantity
   }
 
   printNotes(notes?: INote | INotes): void {
-    // const { printNotesAsTable } = await import('../output.console/output.console');
     if (Array.isArray(notes)) {
       printNotesAsTable.send(notes);
     } else if (notes) {

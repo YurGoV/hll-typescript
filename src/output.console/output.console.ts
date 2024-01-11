@@ -1,5 +1,4 @@
 const Table = require('cli-table');
-import { notes } from '../data/notes';
 import { INote, INotes } from '../interfaces/notes.interface';
 import { IOutputProvider } from '../interfaces/output.interface';
 
@@ -15,14 +14,6 @@ class PrintAsTableProvider implements IOutputProvider {
 
   outputNotes(notesToOutput: INotes): void {
     this.table.length = 0;
-
-    // if (notes.length > 0) {
-    //   this.table.options.head = Object.keys(notesToOutput[0] || {});
-    // }
-    //
-    // notes.forEach((row: INote) => {
-    //   this.table.push(Object.values(row));
-    // });
 
     if (notesToOutput.length > 0) {
       const columnsOrder: (keyof INote)[] = ['id', 'title', 'task', 'isDone', 'createdAt', 'updatedAt'];
@@ -40,7 +31,6 @@ class PrintAsTableProvider implements IOutputProvider {
 
 class PrintAsStringProvider implements IOutputProvider {
   initialize(): void {
-    // Initialization logic if needed
   }
 
   outputNotes(notesToOutput: INote | INote[]): void {
