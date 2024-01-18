@@ -1,0 +1,9 @@
+import { IClient, IVisit } from './interfaces';
+
+export const visits: IVisit[] = [
+  {
+    date: new Date('2024-01-14T07:55:28'),
+    clientPhone: { phoneNumber: 380670000000 } as Pick<IClient, 'phoneNumber'>,
+    isVisitComplete: true,
+  },
+];

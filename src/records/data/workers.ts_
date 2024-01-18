@@ -1,0 +1,28 @@
+import { IWorker, WorkerPositions } from './interfaces';
+
+export const workers: IWorker[] = [
+  {
+    name: 'Greg',
+    age: 38,
+    phoneNumber: 380670080000,
+    workPosition: WorkerPositions.DIRECTOR,
+  },
+  {
+    name: 'Melany',
+    age: 28,
+    phoneNumber: 380670080000,
+    workPosition: WorkerPositions.ACCOUNTANT,
+  },
+  {
+    name: 'Sam',
+    age: 23,
+    phoneNumber: 380670080000,
+    workPosition: WorkerPositions.WORKER,
+  },
+  {
+    name: 'Jane',
+    age: 22,
+    phoneNumber: 380670080000,
+    workPosition: WorkerPositions.WORKER,
+  },
+];

@@ -1,6 +1,6 @@
-import { Visitor } from './interfaces';
+import { IClient } from './interfaces';
 
-export const visitors: Visitor[] = [
+export const clients: IClient[] = [
   {
     name: 'Joe',
     age: 28,

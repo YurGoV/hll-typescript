@@ -1,0 +1,13 @@
+import { AnimalHealth, AnimalTypes, IAnimal } from './interfaces';
+
+export const animals: IAnimal[] = [{
+  name: 'Bunny',
+  health: AnimalHealth.EXCELLENT,
+  age: 4,
+  type: AnimalTypes.PREDATOR,
+}, {
+  name: 'Buddy',
+  health: AnimalHealth.EXCELLENT,
+  age: 3,
+  type: AnimalTypes.HERBIVORE,
+}];
