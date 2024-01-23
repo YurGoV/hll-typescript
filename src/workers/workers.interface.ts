@@ -1,4 +1,7 @@
+// wokrers.interface.ts
+import { IClient } from '../clients/clients.interface';
 import { IPeople } from '../common/interfaces';
+import { ITicket, TicketType } from '../ticket-office/interfaces';
 
 export enum WorkersPositions {
   WORKER = 'worker',
@@ -11,4 +14,14 @@ export enum WorkersPositions {
 export interface IWorker extends IPeople {
   workPosition: WorkersPositions
   
+}
+
+export interface IWorkerWithTicket extends IWorker {
+  createTicket: (person: IPeople, type: TicketType) => ITicket;
+
+  closeVisit: (client: IClient) => void;
+}
+
+export interface IWorkerWithPaySalary extends IWorker {
+  paySalary: () => void;
 }

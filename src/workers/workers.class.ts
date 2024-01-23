@@ -1,3 +1,4 @@
+// workers.class.ts
 import { IWorker, WorkersPositions } from './workers.interface';
 
 export class Worker implements IWorker {
@@ -7,7 +8,7 @@ export class Worker implements IWorker {
 
   readonly phoneNumber: number;
 
-  readonly receivedMessages: string;
+  readonly receivedMessages: string[];
 
   walletAmount: number;
 
@@ -24,7 +25,7 @@ export class Worker implements IWorker {
     this.age = age;
     this.phoneNumber = phoneNumber;
     this.walletAmount = 300000;
-    this.receivedMessages = '';
+    this.receivedMessages = [];
     this.workPosition = workPosition;
   }
 

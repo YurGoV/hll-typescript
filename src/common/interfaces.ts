@@ -1,4 +1,4 @@
-// NOTE: peoples
+// interfaces.ts
 
 export enum AnimalHealth {
   EXCELLENT = 'exceellent',

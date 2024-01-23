@@ -1,3 +1,4 @@
+// clients.class.ts
 import { IClient } from './clients.interface';
 
 export class Client implements IClient {
@@ -7,7 +8,7 @@ export class Client implements IClient {
 
   readonly phoneNumber: number;
 
-  readonly receivedMessages: string;
+  readonly receivedMessages: string[];
 
   walletAmount: number;
 
@@ -18,7 +19,7 @@ export class Client implements IClient {
     this.age = age;
     this.phoneNumber = phoneNumber;
     this.walletAmount = 300000;
-    this.receivedMessages = '';
+    this.receivedMessages = [];
     // TODO: add to records...
     // NOTE: to simplify - add money to wallet is out of logic
   }

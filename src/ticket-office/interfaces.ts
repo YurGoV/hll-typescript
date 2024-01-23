@@ -1,12 +1,21 @@
-enum TicketType {
+import { IClient } from '../clients/clients.interface';
+
+export enum TicketType {
   ADULT = 'adult',
   CHILD = 'child',
   FAMILY = 'family',
 }
 
-interface ITicket {
+
+export interface ITicket {
   type: TicketType;
-  prise: number;
+  price: number;
   date: Date;
-  visitor: string;
+  client: IClient;
+}
+
+export interface IVisit {
+  date: Date;
+  client: IClient;
+  isVisitComplete: boolean;
 }
