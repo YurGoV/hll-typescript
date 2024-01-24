@@ -1,5 +1,6 @@
 // workers.class.ts
 import { IWorker, WorkersPositions } from './workers.interface';
+import { workersList } from './workers.list';
 
 export class Worker implements IWorker {
   readonly fullName: string;
@@ -10,7 +11,7 @@ export class Worker implements IWorker {
 
   readonly receivedMessages: string[];
 
-  walletAmount: number;
+  private salaryCard: number;
 
   workPosition: WorkersPositions;
   // status: TStatus;
@@ -24,11 +25,15 @@ export class Worker implements IWorker {
     this.fullName = fullName;
     this.age = age;
     this.phoneNumber = phoneNumber;
-    this.walletAmount = 300000;
+    this.salaryCard = 0;
     this.receivedMessages = [];
     this.workPosition = workPosition;
+
+    workersList.addWorker(this);
   }
 
-
-  receiveMessage(): void {}
+  rechargeCard(salary: number): void {
+    this.salaryCard += salary;
+    console.log(`worker ${this.fullName} received ${salary} of salary`);
+  }
 }

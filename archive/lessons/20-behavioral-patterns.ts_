@@ -1,0 +1,312 @@
+// Strategy
+
+// interface IStrategy {
+//   doAlghorithm(data: string[]): string[];
+// }
+
+// class StrategyA implements IStrategy {
+//   doAlghorithm(data: string[]): string[] {
+//     return data.sort();
+//   }
+// }
+
+// class StrategyB implements IStrategy {
+//   doAlghorithm(data: string[]): string[] {
+//     return data.reverse();
+//   }
+// }
+
+// class Context {
+//   #strategy: IStrategy;
+
+//   constructor(strategy: IStrategy) {
+//     this.#strategy = strategy;
+//   }
+
+//   set strategy(strategy: IStrategy) {
+//     this.#strategy = strategy;
+//   }
+
+//   doSomeBusinessLogic(): void {
+//     // Some business logic;
+
+//     this.#strategy.doAlghorithm(["a", "b", "c"]);
+//   }
+// }
+
+// // Client code
+// const context = new Context(new StrategyA());
+
+// context.doSomeBusinessLogic();
+
+// // User action
+
+// context.strategy = new StrategyB();
+// context.doSomeBusinessLogic();
+
+// class User {
+//   githubToken?: string;
+//   jwtToken?: string;
+// }
+
+// interface IAuthStrategy {
+//   auth(user: User): boolean;
+// }
+
+// class JwtStrategy implements IAuthStrategy {
+//   auth(user: User): boolean {
+//     // JWT decode
+//     // Check if user exist
+//     // Check if token not expired......
+//     if (user.jwtToken) {
+//       return true;
+//     }
+
+//     return false;
+//   }
+// }
+
+// class GithubStrategy implements IAuthStrategy {
+//   auth(user: User): boolean {
+//     if (user.githubToken) {
+//       // Go to github API
+//       return true;
+//     }
+
+//     return false;
+//   }
+// }
+
+// class Auth {
+//   #strategy: IAuthStrategy;
+
+//   constructor(strategy: IAuthStrategy) {
+//     this.#strategy = strategy;
+//   }
+
+//   setStrategy(strategy: IAuthStrategy): void {
+//     this.#strategy = strategy;
+//   }
+
+//   authUser(user: User): boolean {
+//     return this.#strategy.auth(user);
+//   }
+// }
+
+// // Client code
+// const user = new User();
+// const auth = new Auth(new JwtStrategy());
+
+// user.jwtToken = "some-jwt-token";
+
+// auth.authUser(user);
+
+// user.jwtToken = undefined;
+// user.githubToken = "some-github-token";
+// auth.setStrategy(new GithubStrategy());
+// auth.authUser(user);
+
+// function foo(provider: "github" | "jwt") {
+//   const providerMap = {
+//     'github': new GithubStrategy(),
+//   }
+
+//   auth.setStrategy(providerMap[provider]);
+// }
+
+// Observable
+
+// interface IObservable {
+//   attach(observer: IObserver): void;
+
+//   detach(observer: IObserver): void;
+
+//   notify(): void;
+// }
+
+// interface IObserver {
+//   update(observable: IObservable): void;
+// }
+
+// abstract class Observable implements IObservable {
+//   #observers: IObserver[] = [];
+
+//   attach(observer: IObserver): void {
+//     if (this.#observers.includes(observer)) {
+//       return;
+//     }
+
+//     this.#observers.push(observer);
+//   }
+
+//   detach(observer: IObserver): void {
+//     const observerIndex = this.#observers.indexOf(observer);
+
+//     if (observerIndex === -1) {
+//       return;
+//     }
+
+//     this.#observers.splice(observerIndex, 1);
+//   }
+
+//   notify(): void {
+//     this.#observers.forEach((observer) => {
+//       observer.update(this);
+//     });
+//   }
+// }
+
+// class ConcreteObservable extends Observable {
+//   #state = 0;
+
+//   get state(): number {
+//     return this.#state;
+//   }
+
+//   someBusinessLogic(): void {
+//     // ......
+//     this.#state = Math.random();
+
+//     this.notify();
+//   }
+// }
+
+// class ObserverA implements IObserver {
+//   update(observable: ConcreteObservable): void {
+//     if (observable.state > 0.5) {
+//       console.log(`ObserverA reacted to event ${observable.state}`);
+//     }
+//   }
+// }
+
+// class ObserverB implements IObserver {
+//   update(observable: ConcreteObservable): void {
+//     if (observable.state < 0.5) {
+//       console.log(`ObserverB reacted to event ${observable.state}`);
+//     }
+//   }
+// }
+
+// const observable = new ConcreteObservable();
+
+// const observerA = new ObserverA();
+// observable.attach(observerA);
+
+// const observerB = new ObserverB();
+// observable.attach(observerB);
+
+// observable.someBusinessLogic();
+// observable.someBusinessLogic();
+
+interface IObserver {
+  update(observable: IObservable): void;
+}
+
+interface IObservable {
+  attach(observer: IObserver): void;
+
+  detach(observer: IObserver): void;
+
+  notify(): void;
+}
+
+class Lead {
+  constructor(public name: string, public phone: string) {}
+}
+
+interface IOrder {
+  amount: number;
+  price: number;
+}
+
+abstract class Observable implements IObservable {
+  #observers: IObserver[] = [];
+
+  attach(observer: IObserver): void {
+    if (this.#observers.includes(observer)) {
+      return;
+    }
+    this.#observers.push(observer);
+  }
+
+  detach(observer: IObserver): void {
+    const observerIndex = this.#observers.indexOf(observer);
+    if (observerIndex === -1) {
+      return;
+    }
+    this.#observers.splice(observerIndex, 1);
+  }
+
+  notify(): void {
+    this.#observers.forEach((observer) => {
+      observer.update(this);
+    });
+  }
+}
+
+class LeadManager extends Observable {
+  #leads: Lead[] = [];
+
+  get leads() {
+    return this.#leads;
+  }
+
+  addLead(lead: Lead): void {
+    this.#leads.push(lead);
+
+    this.notify();
+  }
+}
+
+class OrderManager extends Observable {
+  #orders: IOrder[] = [];
+
+  get orders() {
+    return this.#orders;
+  }
+
+  createOrder(order: IOrder): void {
+    this.#orders.push(order);
+
+    this.notify();
+  }
+}
+
+class NotificationService implements IObserver {
+  update(observable: IObservable): void {
+    if (observable instanceof LeadManager) {
+      const newLead = observable.leads[observable.leads.length - 1]!;
+
+      this.#notificateSalesTeam(newLead);
+    } else if (observable instanceof OrderManager) {
+      const newOrder = observable.orders[observable.orders.length - 1]!;
+
+      this.#notifyDeliveryTeam(newOrder);
+    }
+  }
+
+  #notifyDeliveryTeam(order: IOrder) {
+    console.log(
+      `Notification to delivery team about new order: ${order.amount} ${order.price}`
+    );
+  }
+
+  #notificateSalesTeam(lead: Lead) {
+    console.log(
+      `Notification to sales team about new lead: ${lead.name}, ${lead.phone}`
+    );
+  }
+}
+
+const lead = new Lead("John", "Connor");
+const leadManager = new LeadManager();
+const orderManager = new OrderManager();
+
+const notificationService = new NotificationService();
+
+leadManager.attach(notificationService);
+leadManager.addLead(lead);
+
+orderManager.attach(notificationService);
+
+orderManager.createOrder({ amount: 1, price: 1000 });

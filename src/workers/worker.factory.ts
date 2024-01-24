@@ -1,6 +1,8 @@
-// NOTE: ідея цїєї факторі - можливість за "виробничої необхідності"
-// надавати функцію додавання клієнтів будь-яким робітникам,
+// NOTE: ????? describe factory
 
+import { accounting } from '../accounting/accounting.class';
+import { animalsList } from '../animals/animals';
+import { IAnimal } from '../animals/interfaces';
 import { IClient } from '../clients/clients.interface';
 import { IPeople } from '../common/interfaces';
 import { createTicketFacade } from '../ticket-office/create.ticket.facade';
@@ -8,6 +10,7 @@ import { ITicket, IVisit, TicketType } from '../ticket-office/interfaces';
 import { visitsList } from '../ticket-office/visits.list';
 import { Worker } from './workers.class';
 import {
+  IWorkerWithAddAnimal,
   IWorkerWithPaySalary,
   IWorkerWithTicket,
   WorkersPositions,
@@ -36,25 +39,39 @@ export function withPaySalary<T extends { new(...args: any[]): Worker }>(
 ): T & IWorkerWithPaySalary {
   return class extends constructor {
     paySalary(this: Worker): void {
-      console.log('pay salary...');
+      accounting.paySalary();
+    }
+  } as any;
+}
+
+export function withAddAnimal<T extends { new(...args: any[]): Worker }>(
+  constructor: T,
+): T & IWorkerWithAddAnimal {
+  return class extends constructor {
+    addAnimal(this: Worker, animal: IAnimal): void {
+      animalsList.addAnimal(animal);
     }
   } as any;
 }
 
 export const WorkerWithCreateTicket = withTicketRole(Worker);
 export const WorkerWithPaySalary = withPaySalary(Worker);
+export const WorkerWithAddAnimal = withAddAnimal(Worker);
 
 export enum ROLE {
   PAY_SALLARY = 'pay',
   CREATE_TICKETS = 'ticket',
   WORKER = 'worker',
+  ADD_ANIMAL = 'animal',
 }
 
 type WorkerReturnType<T extends ROLE> = T extends ROLE.PAY_SALLARY
   ? IWorkerWithPaySalary
   : T extends ROLE.CREATE_TICKETS
     ? IWorkerWithTicket
-    : Worker;
+    : T extends ROLE.ADD_ANIMAL
+      ? IWorkerWithAddAnimal
+      : Worker;
 
 export class WorkerFactory {
   createWorker<T extends ROLE>(
@@ -73,6 +90,13 @@ export class WorkerFactory {
       ) as WorkerReturnType<T>;
     } else if (prop === ROLE.CREATE_TICKETS) {
       return new WorkerWithCreateTicket(
+        fullName,
+        age,
+        phoneNumber,
+        workPosition,
+      ) as WorkerReturnType<T>;
+    } else if (prop === ROLE.ADD_ANIMAL) {
+      return new WorkerWithAddAnimal(
         fullName,
         age,
         phoneNumber,

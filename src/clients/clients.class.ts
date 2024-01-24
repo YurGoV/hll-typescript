@@ -12,6 +12,8 @@ export class Client implements IClient {
 
   walletAmount: number;
 
+  // receiveMessage: (message?: string) => string;
+
   // status: TStatus;
 
   constructor(fullName: string, age: number, phoneNumber: number) {
@@ -20,8 +22,6 @@ export class Client implements IClient {
     this.phoneNumber = phoneNumber;
     this.walletAmount = 300000;
     this.receivedMessages = [];
-    // TODO: add to records...
-    // NOTE: to simplify - add money to wallet is out of logic
   }
 
   buyTicket(visitPayment: number): void {
@@ -35,5 +35,8 @@ export class Client implements IClient {
 
   leftTheZoo(): void {}
 
-  receiveMessage(): void {}
+  receiveMessage(message: string): string {
+    this.receivedMessages.push(message);
+    return `client ${this.fullName} received message: ${message}`;
+  }
 }

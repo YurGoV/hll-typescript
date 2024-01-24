@@ -105,7 +105,12 @@ module.exports = {
     'no-unsafe-finally': 'error',
     'no-unused-expressions': 'error',
     'no-unused-vars': 'off',
-    'no-use-before-define': ['error', { functions: false }],
+    // NOTE: replaced
+    //
+    // 'no-use-before-define': ['error', { functions: false }],
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': 'error',
+    // NOTE: replaced
     'no-useless-call': 'error',
     'no-useless-concat': 'error',
     'no-useless-return': 'error',

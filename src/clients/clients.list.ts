@@ -1,21 +1,35 @@
 import { IPeople } from '../common/interfaces';
 import { IClient } from './clients.interface';
+import { Client } from './clients.class';
 
 class ClientsList {
   private clientsList: IClient[] = [];
 
-  isClientExist(person: IPeople): boolean {
-    const searchResult = this.clientsList.find(
+  getClient(person: IPeople): IClient {
+    const oldClient = this.clientsList.find(
       (client: IClient) => client.phoneNumber === person.phoneNumber,
     );
+    if (!oldClient) {
+      return this.addClient(person);
+    }
 
-    return searchResult ? true : false;
+    return oldClient;
   }
 
-  addClient(client: IClient): void {
-    this.clientsList.push(client);
+  addClient(person: IPeople): IClient {
+    const newClient = new Client(
+      person.fullName,
+      person.age,
+      person.phoneNumber,
+    );
+    this.clientsList.push(newClient);
 
-    // Additional logic 
+    return newClient;
+    // Additional logic
+  }
+
+  get list(): IClient[] {
+    return this.clientsList;
   }
 
   // ... other methods

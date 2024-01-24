@@ -1,4 +1,6 @@
 // main.ts
+import { animalsList } from './animals/animals';
+import { AnimalHealth, AnimalTypes } from './animals/interfaces';
 import { TicketType } from './ticket-office/interfaces';
 import { ticketsList } from './ticket-office/tickets.list';
 import { visitsList } from './ticket-office/visits.list';
@@ -31,20 +33,57 @@ const accounterJimm = factory.createWorker(
   ROLE.PAY_SALLARY,
 );
 
+const administratorMegan = factory.createWorker(
+  'Megan Rainy',
+  30,
+  38900000000,
+  WorkersPositions.ADMINISTRATOR,
+  ROLE.ADD_ANIMAL,
+);
+
+administratorMegan.addAnimal({
+  name: 'Buddy',
+  health: AnimalHealth.EXCELLENT,
+  age: 4,
+  type: AnimalTypes.PREDATOR,
+});
+
 accounterJimm.paySalary();
 
 paymasterJane.createTicket(
-  { fullName: 'second Client Name', age: 25, phoneNumber: 5555545555 },
+  {
+    fullName: 'second Client Name',
+    age: 25,
+    phoneNumber: 5555545555,
+    receivedMessages: [],
+  },
   TicketType.ADULT,
 );
-paymasterJane.createTicket({ fullName: 'Client Name', age: 25, phoneNumber:5555555555 }, TicketType.ADULT );
+paymasterJane.createTicket(
+  {
+    fullName: 'Client Name',
+    age: 25,
+    phoneNumber: 5555555555,
+    receivedMessages: [],
+  },
+  TicketType.ADULT,
+);
 
 // TODO: give only number
-paymasterJane.closeVisit({
-  fullName: 'Client Name',
-  age: 25,
-  phoneNumber: 5555555555,
+// paymasterJane.closeVisit({
+//   fullName: 'Client Name',
+//   age: 25,
+//   phoneNumber: 5555555555,
+//   receivedMessages: [],
+// });
+
+administratorMegan.addAnimal({
+  name: 'Giffy',
+  health: AnimalHealth.EXCELLENT,
+  age: 4,
+  type: AnimalTypes.HERBIVORE,
 });
 
 console.log(visitsList);
 console.log(ticketsList);
+console.log(animalsList.list);

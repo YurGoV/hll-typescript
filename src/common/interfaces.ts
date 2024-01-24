@@ -1,21 +1,9 @@
 // interfaces.ts
-
-export enum AnimalHealth {
-  EXCELLENT = 'exceellent',
-  GOOD = 'good',
-  NEED_TO_THERAPY = 'therapy',
-}
-
-export enum AnimalTypes {
-  PREDATOR = 'predator',
-  HERBIVORE = 'herbivore',
-  INSECTIVOROUS = 'insectivorous',
-}
-
 export interface IPeople {
   fullName: string;
   age: number;
   phoneNumber: number;
+  receivedMessages: string[];
 }
 
 
@@ -29,9 +17,3 @@ export interface IPeople {
 // }
 
 // NOTE: animals
-export interface IAnimal {
-  name: string;
-  health: AnimalHealth;
-  age: number;
-  type: AnimalTypes;
-}

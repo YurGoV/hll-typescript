@@ -8,15 +8,20 @@ export function createTicketFacade(
   person: IPeople,
   ticketType: TicketType,
 ): ITicket {
-  const existingClient = clientsList.isClientExist(person);
+  // const existingClient = clientsList.isClientExist(person);
+  //
+  // if (!existingClient) {
+  //   clientsList.addClient(person);
+  // }
+  // let existingClient: boolean | IClient = clientsList.isClientExist(person);
+  //
+  // if (!existingClient) {
+  //   existingClient = clientsList.addClient(person);
+  // }
+  const client = clientsList.getClient(person);
+  const newTicket: ITicket = ticketsList.createTicket(client, ticketType);
 
-  if (!existingClient) {
-    clientsList.addClient(person);
-  }
-
-  const newTicket: ITicket = ticketsList.createTicket(person, ticketType);
-
-  visitsList.addVisit(person, false);
+  visitsList.addVisit(client, false);
 
   return newTicket;
 }
