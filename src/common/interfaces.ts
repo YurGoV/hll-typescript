@@ -1,4 +1,3 @@
-// interfaces.ts
 export interface IObserver {
   update(observable: IObservable): void;
 }
@@ -13,6 +12,4 @@ export interface IPeople {
   fullName: string;
   age: number;
   phoneNumber: number;
-  receivedMessages: string[];
 }
-

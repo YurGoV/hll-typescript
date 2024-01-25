@@ -16,6 +16,12 @@ class ClientsList {
     return oldClient;
   }
 
+  getClientByPhone(phone: number): IClient | undefined {
+    return this.clientsList.find(
+      (client: IClient) => client.phoneNumber === phone,
+    );
+  }
+
   addClient(person: IPeople): IClient {
     const newClient = new Client(
       person.fullName,
@@ -25,14 +31,11 @@ class ClientsList {
     this.clientsList.push(newClient);
 
     return newClient;
-    // Additional logic
   }
 
   get list(): IClient[] {
     return this.clientsList;
   }
-
-  // ... other methods
 }
 
 export const clientsList = new ClientsList();

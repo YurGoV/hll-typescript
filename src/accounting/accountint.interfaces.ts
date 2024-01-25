@@ -1,11 +1,6 @@
 import { WorkersPositions } from '../workers/workers.interface';
 
-// export interface IAccounting {
-//   // readonly budget: number;
-//   // readonly getBudget: () => number;
-//
-//   paySalary(): void;
-// }
+export type ZooState = 'open' | 'close' | 'readyToClose';
 
 export const salaries: Record<WorkersPositions, number> = {
   [WorkersPositions.WORKER]: 15000,

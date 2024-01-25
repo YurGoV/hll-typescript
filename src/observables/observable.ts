@@ -1,4 +1,5 @@
-//observable.ts
+// NOTE:можливість динамічно підключати та відключати повідомлення
+// без "втручання" в основний код
 import { IObservable, IObserver } from '../common/interfaces';
 
 export abstract class Observable implements IObservable {
@@ -25,4 +26,3 @@ export abstract class Observable implements IObservable {
     });
   }
 }
-

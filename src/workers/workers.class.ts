@@ -1,4 +1,3 @@
-// workers.class.ts
 import { IWorker, WorkersPositions } from './workers.interface';
 import { workersList } from './workers.list';
 
@@ -14,7 +13,6 @@ export class Worker implements IWorker {
   private salaryCard: number;
 
   workPosition: WorkersPositions;
-  // status: TStatus;
 
   constructor(
     fullName: string,

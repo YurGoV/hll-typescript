@@ -19,18 +19,20 @@ export class NotificationService implements IObserver {
 
   #notifyZooClosedSoon(): void {
     console.log('zoo is closed soon');
-    console.log(visitsList.listCurrentVisitors, 'current visitors');
-    // for (const client of clientsList.list) {
-    //
-    //   const sendMessageResult = client.receiveMessage(
-    //     `Dear ${client.fullName}, our zoo is closed soon. We glad to see you next day!`,
-    //   );
-    // }
+    for (const visit of visitsList.listCurrentVisitors) {
+      const client = clientsList.getClientByPhone(visit.client.phoneNumber);
+      if (client) {
+        const sendMessageResult = client.receiveMessage(
+          `Dear ${client.fullName}, our zoo is closed soon. We glad to see you next day!`,
+        );
+
+        console.log(sendMessageResult);
+      }
+    }
   }
 
   #notifyAllClientsAboutAnimal(newAnimal: IAnimal): void {
     for (const client of clientsList.list) {
-      // console.log('for clients cycle');
       const sendMessageResult = client.receiveMessage(
         `${client.fullName}, hi again! just now there are new animal ${newAnimal.name} in our zoo! we are waiting for you..`,
       );

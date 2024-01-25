@@ -4,7 +4,6 @@ export enum AnimalHealth {
   NEED_TO_THERAPY = 'therapy',
 }
 
-
 export enum AnimalTypes {
   PREDATOR = 'predator',
   HERBIVORE = 'herbivore',
@@ -17,4 +16,3 @@ export interface IAnimal {
   age: number;
   type: AnimalTypes;
 }
-

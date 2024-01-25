@@ -41,4 +41,3 @@ export class Animal implements IAnimal {
     animalsList.addAnimal(this);
   }
 }
-

@@ -1,12 +1,14 @@
-// NOTE: ????? describe factory
-
+// NOTE: мета факторі - зробити можливіть дещо "динамічно",
+// за так би мовити "виробничої необхідності", надавати
+// можливість працівникам здійснювати ті чи інші функції,
+// що можуть напряму не відноситися до їх посади
 import { accounting } from '../accounting/accounting.class';
 import { animalsList } from '../animals/animals';
 import { IAnimal } from '../animals/interfaces';
 import { IClient } from '../clients/clients.interface';
 import { IPeople } from '../common/interfaces';
 import { createTicketFacade } from '../ticket-office/create.ticket.facade';
-import { ITicket, IVisit, TicketType } from '../ticket-office/interfaces';
+import { ITicket, TicketType } from '../ticket-office/interfaces';
 import { visitsList } from '../ticket-office/visits.list';
 import { Worker } from './workers.class';
 import {
@@ -20,9 +22,15 @@ export function withTicketRole<T extends { new(...args: any[]): Worker }>(
   constructor: T,
 ): T & IWorkerWithTicket {
   return class extends constructor {
-    createTicket(this: Worker, person: IPeople, type: TicketType): ITicket {
-      console.log('Creating ticket...');
-      const createdTicket: ITicket = createTicketFacade(person, type);
+    createTicket(
+      this: Worker,
+      person: IPeople,
+      type: TicketType,
+    ): ITicket | undefined {
+      const createdTicket: ITicket | undefined = createTicketFacade(
+        person,
+        type,
+      );
       return createdTicket;
     }
 
@@ -54,9 +62,9 @@ export function withAddAnimal<T extends { new(...args: any[]): Worker }>(
   } as any;
 }
 
-export const WorkerWithCreateTicket = withTicketRole(Worker);
-export const WorkerWithPaySalary = withPaySalary(Worker);
-export const WorkerWithAddAnimal = withAddAnimal(Worker);
+const WorkerWithCreateTicket = withTicketRole(Worker);
+const WorkerWithPaySalary = withPaySalary(Worker);
+const WorkerWithAddAnimal = withAddAnimal(Worker);
 
 export enum ROLE {
   PAY_SALLARY = 'pay',

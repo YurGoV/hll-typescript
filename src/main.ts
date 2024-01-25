@@ -3,18 +3,13 @@ import { accounting } from './accounting/accounting.class';
 import { animalsList } from './animals/animals';
 import { AnimalHealth, AnimalTypes } from './animals/interfaces';
 import { notificationService } from './common/notification.service';
-// import { notificationService } from './observables/observable';
 import { TicketType } from './ticket-office/interfaces';
-import { ticketsList } from './ticket-office/tickets.list';
-import { visitsList } from './ticket-office/visits.list';
 import { factory, ROLE } from './workers/worker.factory';
 import { WorkersPositions } from './workers/workers.interface';
 
-// Create a regular Worker without createClient method
-
-accounting.attach(notificationService);
-animalsList.attach(notificationService);
-
+// NOTE: prepare to open the zoo
+//
+// Create a Worker
 const workerJohn = factory.createWorker(
   'John Doe',
   30,
@@ -23,29 +18,56 @@ const workerJohn = factory.createWorker(
   ROLE.WORKER,
 );
 
-// Create a Worker with createClient method
+// Create a paymaster
 const paymasterJane = factory.createWorker(
-  'Jane Smith',
+  'Jane Black',
   35,
   9876543210,
   WorkersPositions.PAYMASTER,
   ROLE.CREATE_TICKETS,
 );
 
+// Create accountant
 const accounterJimm = factory.createWorker(
-  'Accounter Jimm',
+  'Jimm Smith',
   32,
   8383272672,
   WorkersPositions.ACCOUNTANT,
   ROLE.PAY_SALLARY,
 );
 
+// Create administrator
 const administratorMegan = factory.createWorker(
-  'Megan Rainy',
+  'Megan Kogan',
   30,
   38900000000,
   WorkersPositions.ADMINISTRATOR,
   ROLE.ADD_ANIMAL,
+);
+
+// NOTE: turn on notifications logic
+accounting.attach(notificationService);
+animalsList.attach(notificationService);
+
+// NOTE: open the zoo
+accounting.setZooState(administratorMegan, 'open');
+
+paymasterJane.createTicket(
+  {
+    fullName: 'Sam Vordik',
+    age: 25,
+    phoneNumber: 5555545551,
+  },
+  TicketType.ADULT,
+);
+
+paymasterJane.createTicket(
+  {
+    fullName: 'Kim Saruman',
+    age: 25,
+    phoneNumber: 5555545552,
+  },
+  TicketType.ADULT,
 );
 
 administratorMegan.addAnimal({
@@ -55,33 +77,20 @@ administratorMegan.addAnimal({
   type: AnimalTypes.PREDATOR,
 });
 
-accounterJimm.paySalary();
-
 paymasterJane.createTicket(
   {
-    fullName: 'second Client Name',
-    age: 25,
-    phoneNumber: 5555545555,
-    receivedMessages: [],
+    fullName: 'Alex Ericcson',
+    age: 13,
+    phoneNumber: 5555555553,
   },
-  TicketType.ADULT,
-);
-paymasterJane.createTicket(
-  {
-    fullName: 'Client Name',
-    age: 25,
-    phoneNumber: 5555555555,
-    receivedMessages: [],
-  },
-  TicketType.ADULT,
+  TicketType.CHILD,
 );
 
 // TODO: give only number
 paymasterJane.closeVisit({
-  fullName: 'Client Name',
+  fullName: 'Sam Vordik',
   age: 25,
-  phoneNumber: 5555555555,
-  receivedMessages: [],
+  phoneNumber: 5555545551,
 });
 
 administratorMegan.addAnimal({
@@ -91,9 +100,28 @@ administratorMegan.addAnimal({
   type: AnimalTypes.HERBIVORE,
 });
 
-accounting.setZooState(paymasterJane, 'readyToClose');
+accounterJimm.paySalary();
 accounting.setZooState(administratorMegan, 'readyToClose');
 
-console.log(visitsList);
-console.log(ticketsList);
-console.log(animalsList.list);
+// NOTE: output:
+//
+// client Sam Vordik received message: Sam Vordik, hi again! just now there are
+//       new animal Buddy in our zoo! we are waiting for you..
+// client Kim Saruman received message: Kim Saruman, hi again! just now there
+//       are new animal Buddy in our zoo! we are waiting for you..
+// closing visit...
+// client Sam Vordik received message: Sam Vordik, hi again! just now there are
+//       new animal Giffy in our zoo! we are waiting for you..
+// client Kim Saruman received message: Kim Saruman, hi again! just now there
+//       are new animal Giffy in our zoo! we are waiting for you..
+// client Alex Ericcson received message: Alex Ericcson, hi again! just
+//        now there are new animal Giffy in our zoo! we are waiting for you..
+// worker John Doe received 15000 of salary
+// worker Jane Black received 17000 of salary
+// worker Jimm Smith received 18000 of salary
+// worker Megan Kogan received 19000 of salary
+// zoo is closed soon
+// client Kim Saruman received message: Dear Kim Saruman, our zoo is closed soon.
+//        We glad to see you next day!
+// client Alex Ericcson received message: Dear Alex Ericcson, our zoo is closed soon.
+//        We glad to see you next day!

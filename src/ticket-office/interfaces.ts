@@ -6,7 +6,6 @@ export enum TicketType {
   FAMILY = 'family',
 }
 
-
 export interface ITicket {
   type: TicketType;
   price: number;
