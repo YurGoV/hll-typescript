@@ -1,4 +1,14 @@
 // interfaces.ts
+export interface IObserver {
+  update(observable: IObservable): void;
+}
+
+export interface IObservable {
+  attach(observer: IObserver): void;
+  detach(observer: IObserver): void;
+  notify(): void;
+}
+
 export interface IPeople {
   fullName: string;
   age: number;
@@ -6,14 +16,3 @@ export interface IPeople {
   receivedMessages: string[];
 }
 
-
-// export interface IClient extends IPeople { }
-
-// // NOTE: visits
-// export interface IVisit {
-//   date: Date;
-//   clientPhone: Pick<IClient, 'phoneNumber'>;
-//   isVisitComplete: boolean;
-// }
-
-// NOTE: animals

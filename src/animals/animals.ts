@@ -1,4 +1,5 @@
-import { notificationService, Observable } from '../observables/observable';
+//animals.ts
+import { Observable } from '../observables/observable';
 import { AnimalHealth, AnimalTypes, IAnimal } from './interfaces';
 
 export class AnimalsList extends Observable {
@@ -16,7 +17,6 @@ export class AnimalsList extends Observable {
 }
 
 export const animalsList = new AnimalsList();
-animalsList.attach(notificationService);
 
 export class Animal implements IAnimal {
   readonly name: string;
@@ -41,3 +41,4 @@ export class Animal implements IAnimal {
     animalsList.addAnimal(this);
   }
 }
+

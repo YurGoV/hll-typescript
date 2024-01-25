@@ -1,0 +1,48 @@
+// import { AnimalsList } from '../animals/animals';
+// import { IAnimal } from '../animals/interfaces';
+// import { clientsList } from '../clients/clients.list';
+// import { Accounting } from '../accounting/accounting.class';
+// import { IObservable, IObserver } from './observable';
+//
+// class NotificationService implements IObserver {
+//   update(observable: IObservable): void {
+//     if (observable instanceof AnimalsList) {
+//       const newAnimal = observable.list[observable.list.length - 1]!;
+//
+//       this.#notifyAllClientsAboutAnimal(newAnimal);
+//     } if (observable instanceof Accounting) {
+//       // const newOrder = observable.orders[observable.orders.length - 1]!;
+//
+//       this.#notifyZooClosedSoon();
+//     }
+//   }
+//
+//   #notifyZooClosedSoon(): void {
+//     console.log('zoo is closed soon');
+//   }
+//
+//   #notifyAllClientsAboutAnimal(newAnimal: IAnimal): void {
+//     for (const client of clientsList.list) {
+//       // console.log('for clients cycle');
+//       const sendMessageResult = client.receiveMessage(
+//         `${client.fullName}, hi again! just now there are new animal ${newAnimal.name} in our zoo! we are waiting for you..`,
+//       );
+//       console.log(sendMessageResult);
+//     }
+//   }
+// }
+//
+// export const notificationService = new NotificationService();
+
+
+// observable.interface.ts
+// export interface IObservable {
+//   attach(observer: IObserver): void;
+//   detach(observer: IObserver): void;
+//   notify(): void;
+// }
+//
+// export interface IObserver {
+//   update(observable: IObservable): void;
+// }
+

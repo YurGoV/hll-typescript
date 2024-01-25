@@ -1,6 +1,9 @@
 // main.ts
+import { accounting } from './accounting/accounting.class';
 import { animalsList } from './animals/animals';
 import { AnimalHealth, AnimalTypes } from './animals/interfaces';
+import { notificationService } from './common/notification.service';
+// import { notificationService } from './observables/observable';
 import { TicketType } from './ticket-office/interfaces';
 import { ticketsList } from './ticket-office/tickets.list';
 import { visitsList } from './ticket-office/visits.list';
@@ -8,6 +11,10 @@ import { factory, ROLE } from './workers/worker.factory';
 import { WorkersPositions } from './workers/workers.interface';
 
 // Create a regular Worker without createClient method
+
+accounting.attach(notificationService);
+animalsList.attach(notificationService);
+
 const workerJohn = factory.createWorker(
   'John Doe',
   30,
@@ -70,12 +77,12 @@ paymasterJane.createTicket(
 );
 
 // TODO: give only number
-// paymasterJane.closeVisit({
-//   fullName: 'Client Name',
-//   age: 25,
-//   phoneNumber: 5555555555,
-//   receivedMessages: [],
-// });
+paymasterJane.closeVisit({
+  fullName: 'Client Name',
+  age: 25,
+  phoneNumber: 5555555555,
+  receivedMessages: [],
+});
 
 administratorMegan.addAnimal({
   name: 'Giffy',
@@ -83,6 +90,9 @@ administratorMegan.addAnimal({
   age: 4,
   type: AnimalTypes.HERBIVORE,
 });
+
+accounting.setZooState(paymasterJane, 'readyToClose');
+accounting.setZooState(administratorMegan, 'readyToClose');
 
 console.log(visitsList);
 console.log(ticketsList);

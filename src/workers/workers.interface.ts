@@ -21,7 +21,7 @@ export interface IWorker extends IPeople {
 export interface IWorkerWithTicket extends IWorker {
   createTicket: (person: IPeople, type: TicketType) => ITicket;
 
-  closeVisit: (client: IClient) => void;
+  closeVisit: (person: IPeople) => void;
 }
 
 export interface IWorkerWithPaySalary extends IWorker {
