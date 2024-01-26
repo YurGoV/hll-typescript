@@ -25,6 +25,10 @@ export class TicketsList {
 
     return ticket;
   }
+
+  get list(): ITicket[] {
+    return this.ticketsList;
+  }
 }
 
 export const ticketsList = new TicketsList();

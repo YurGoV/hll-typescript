@@ -1,6 +1,6 @@
 import { IWorker } from './workers.interface';
 
-class WorkersList {
+export class WorkersList {
   private workersList: IWorker[] = [];
 
   get list(): IWorker[] {
