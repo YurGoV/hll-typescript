@@ -103,6 +103,14 @@ administratorMegan.addAnimal({
 accounterJimm.paySalary();
 accounting.setZooState(administratorMegan, 'readyToClose');
 
+// NOTE: test output summary
+//
+// Test Suites: 12 passed, 12 total
+// Tests:       26 passed, 26 total
+// Snapshots:   0 total
+// Time:        4.577 s, estimated 5 s
+// Ran all test suites.                   
+
 // NOTE: output:
 //
 // client Sam Vordik received message: Sam Vordik, hi again! just now there are

@@ -2,7 +2,7 @@ import { IPeople } from '../common/interfaces';
 import { IClient } from './clients.interface';
 import { Client } from './clients.class';
 
-class ClientsList {
+export class ClientsList {
   private clientsList: IClient[] = [];
 
   getClient(person: IPeople): IClient {

@@ -30,8 +30,9 @@ export class Worker implements IWorker {
     workersList.addWorker(this);
   }
 
-  rechargeCard(salary: number): void {
+  rechargeCard(salary: number): boolean {
     this.salaryCard += salary;
     console.log(`worker ${this.fullName} received ${salary} of salary`);
+    return true;
   }
 }
