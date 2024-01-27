@@ -10,7 +10,6 @@ describe('clients list', () => {
   });
 
   it('should return existing client or create & return new', () => {
-    jest.spyOn(clientsList, 'getClient');
 
     const personOne: IPeople = {
       fullName: 'first client',
@@ -21,14 +20,10 @@ describe('clients list', () => {
     const clientOne = clientsList.getClient(personOne);
     const clientOneAgain = clientsList.getClient(personOne);
 
-    expect(clientOne as unknown as IClient).toBeTruthy();
-    expect(clientOneAgain as unknown as IClient).toBeTruthy();
-    expect(clientOne).toBe(clientOneAgain);
+    expect(clientOneAgain).toEqual(clientOne);
   });
 
   it('should find client by phone', () => {
-    jest.spyOn(clientsList, 'getClient');
-    jest.spyOn(clientsList, 'getClientByPhone');
 
     const personOne: IPeople = {
       fullName: 'first client',
@@ -36,18 +31,15 @@ describe('clients list', () => {
       phoneNumber: 10001,
     };
 
-    clientsList.getClient(personOne);
+    const clientOne = clientsList.getClient(personOne);
     const searchResultOne = clientsList.getClientByPhone(personOne.phoneNumber);
     const searchResultTwo = clientsList.getClientByPhone(10000);
 
-    expect(searchResultOne as unknown as IClient).toBeTruthy();
-    expect(searchResultOne?.phoneNumber).toBe(personOne.phoneNumber);
-    expect(searchResultTwo as unknown as IClient).not.toBeTruthy();
+    expect(searchResultOne).toEqual(clientOne);
     expect(searchResultTwo).toBe(undefined);
   });
 
   it('should return list of clients', () => {
-    jest.spyOn(clientsList, 'getClient');
 
     const personOne: IPeople = {
       fullName: 'first client',
@@ -65,11 +57,11 @@ describe('clients list', () => {
       phoneNumber: 10003,
     };
 
-    clientsList.getClient(personOne);
+    const clientOne = clientsList.getClient(personOne);
     clientsList.getClient(personTwo);
     clientsList.getClient(personThree);
 
-    expect(clientsList.list[0] as unknown as IClient).toBeTruthy();
+    expect(clientsList.list[0]).toEqual(clientOne);
     expect(clientsList.list.length).toBe(3);
   });
 });

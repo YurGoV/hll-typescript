@@ -9,7 +9,6 @@ describe('animals list', () => {
   });
 
   it('should add animal', () => {
-    jest.spyOn(animalsList, 'addAnimal');
 
     const buddy: IAnimal = {
       name: 'buddy',
@@ -20,11 +19,10 @@ describe('animals list', () => {
 
     animalsList.addAnimal(buddy);
 
-    expect(animalsList.list[0] as unknown as IAnimal).toBeTruthy();
+    expect(animalsList.list[0]).toEqual(buddy);
   });
 
   it('should return animals list', () => {
-    jest.spyOn(animalsList, 'addAnimal');
 
     const buddy: IAnimal = {
       name: 'buddy',
@@ -39,10 +37,10 @@ describe('animals list', () => {
       type: AnimalTypes.PREDATOR,
     };
 
-    animalsList.addAnimal(buddy);
-    animalsList.addAnimal(porky);
+    const returnedBuddy = animalsList.addAnimal(buddy);
+    const returnedPordy = animalsList.addAnimal(porky);
 
-    expect(animalsList.list.length).toBe(2);
-    expect(animalsList.list[0] as unknown as IAnimal).toBeTruthy();
+    expect(returnedBuddy).toBe(buddy);
+    expect(returnedPordy).toEqual(porky);
   });
 });

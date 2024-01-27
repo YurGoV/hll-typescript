@@ -26,7 +26,6 @@ describe('ticket list', () => {
         return message;
       },
     };
-    jest.spyOn(ticketsList, 'createTicket');
 
     const adultTicket = ticketsList.createTicket(adultClient, TicketType.ADULT);
     const childTicket = ticketsList.createTicket(childClient, TicketType.CHILD);
@@ -36,7 +35,7 @@ describe('ticket list', () => {
     );
 
     expect(ticketsList).toBeInstanceOf(TicketsList);
-    expect(adultTicket as unknown as ITicket).toBeTruthy();
+    expect(ticketsList.list[0]).toEqual(adultTicket);
     expect((adultTicket as unknown as ITicket).type).toBe(TicketType.ADULT);
     expect((adultTicket as unknown as ITicket).price).toBe(
       TicketPrice[TicketType.ADULT],
@@ -45,7 +44,6 @@ describe('ticket list', () => {
     expect((childTicket as unknown as ITicket).price).toBe(
       TicketPrice[TicketType.CHILD],
     );
-    expect(childToAdultTicket as unknown as ITicket).not.toBeTruthy();
     expect(childToAdultTicket).toBe(undefined);
     expect(ticketsList.list).toHaveLength(2);
   });

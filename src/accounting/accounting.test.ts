@@ -11,7 +11,6 @@ describe('accounting', () => {
   });
 
   it('should pay salary', () => {
-    jest.spyOn(accounting, 'paySalary');
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const worker1: Worker = new Worker(
       'name1',
@@ -45,9 +44,6 @@ describe('accounting', () => {
   });
 
   it('should set zoo state', () => {
-    jest.spyOn(accounting, 'setZooState');
-    jest.spyOn(accounting, 'getZooState');
-
     const worker1: Worker = new Worker(
       'name1',
       25,

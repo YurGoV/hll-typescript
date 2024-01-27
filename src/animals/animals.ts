@@ -9,10 +9,11 @@ export class AnimalsList extends Observable {
     return this.animalsList;
   }
 
-  addAnimal(animal: IAnimal): void {
+  addAnimal(animal: IAnimal): IAnimal {
     this.animalsList.push(animal);
 
     this.notify();
+    return this.animalsList[this.animalsList.length - 1]!;
   }
 }
 
