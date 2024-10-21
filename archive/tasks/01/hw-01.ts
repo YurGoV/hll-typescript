@@ -1,4 +1,4 @@
-class School {
+class School01 {
   directions: string[] = [];
 
   addDirection(direction: string): void {
@@ -6,17 +6,17 @@ class School {
   }
 }
 
-class Direction {
-  private _name: string;
+class Direction01 {
+  #name: string;
 
   levels: number[] = [];
 
   constructor(name: string) {
-    this._name = name;
+    this.#name = name;
   }
 
   get name(): string {
-    return this._name;
+    return this.#name;
   }
 
   addLevel(level: number): void {
@@ -24,7 +24,7 @@ class Direction {
   }
 }
 
-class Level {
+class Level01 {
   private _name: string;
 
   private _program: string;
@@ -53,7 +53,7 @@ class Level {
   }
 }
 
-class Student {
+class Student01 {
   grades: { [key: string]: number } = {};
 
   attendance: boolean[] = [];
@@ -108,14 +108,14 @@ class Student {
   }
 }
 
-class Group {
-  _students: Student[] = [];
+class Group01 {
+  _students: Student01[] = [];
 
   directionName: string;
 
   levelName: string;
 
-  get students(): Student[] {
+  get students(): Student01[] {
     return this._students;
   }
 
@@ -124,11 +124,11 @@ class Group {
     this.levelName = levelName;
   }
 
-  addStudent(student: Student): void {
+  addStudent(student: Student01): void {
     this._students.push(student);
   }
 
-  showPerformance(): Student[] {
+  showPerformance(): Student01[] {
     const sortedStudents = this._students.toSorted(
     // NOTE: ???  error: 1. Property 'toSorted' does not exist on type 'Student[]'. [2339]
     // const sortedStudents = this._students.sort(
