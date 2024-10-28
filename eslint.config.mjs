@@ -1,3 +1,4 @@
+// eslint.config.mjs
 import globals from "globals";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -25,7 +26,8 @@ export default [{
         sourceType: "commonjs",
 
         parserOptions: {
-            project: "./tsconfig.eslint.json",
+            // project: "./tsconfig.eslint.json",
+            project: path.resolve(__dirname, './tsconfig.eslint.json'),  // Ensure the correct path is used here
         },
     },
 

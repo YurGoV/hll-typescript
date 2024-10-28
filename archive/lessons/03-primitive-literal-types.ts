@@ -186,56 +186,56 @@
 // let hobby22: Hobby = "I like Beer";
 // let hobby3: Hobby = "I like VINE";
 
-// NOTE: BOOLEAN
+// // NOTE: BOOLEAN
 
-let a: true;
+// let a: true;
+//
+// a = false;
+//
+// // NOTE: SYMBOL
+//
+// const id: unique symbol = Symbol('id');
+// const wrongId: symbol = Symbol('wrong-id');
+//
+// function validate(key: typeof id): void {}
+//
+// validate(id);
+// validate(wrongId);
+//
+// class Identifier {
+//     static readonly staticProp: unique symbol = Symbol('test');
+//     readonly field: unique symbol = Symbol('test');
+// }
 
-a = false;
-
-Symbol
-
-const id: unique symbol = Symbol('id');
-const wrongId: symbol = Symbol('wrong-id');
-
-function validate(key: typeof id): void {}
-
-validate(id);
-validate(wrongId);
-
-class Identifier {
-    static readonly staticProp: unique symbol = Symbol('test');
-    readonly field: unique symbol = Symbol('test');
-}
-
-// NOTE: ENUM
-
+// // NOTE: ENUM
+//
 // enum Animals {
 //     Cat = 'cat',
 //     Dog = 'dog',
 //     Horse = 'horse',
 // }
-
+//
 // type CatOrDog = Animals.Cat | Animals.Dog;
-
+//
 // let animal: CatOrDog = Animals.Cat;
 // let animal1: CatOrDog = Animals.Dog;
 // let animal2: CatOrDog = Animals.Horse;
 // let animal3: CatOrDog = 'cat';
-
-// enum Animals {
-//   Cat,
-//   Dog,
-//   Horse,
-// }
-
-// let obj = {
-//   Cat: 0,
-// };
-
-// Animals[0];
-
-// type CatOrDog = Animals.Cat | Animals.Dog;
-
-// let animal: CatOrDog = Animals.Cat;
-// let animal1: CatOrDog = Animals.Dog;
-// let animal3: CatOrDog = 0;
+//
+// // enum Animals {
+// //   Cat,
+// //   Dog,
+// //   Horse,
+// // }
+// //
+// // let obj = {
+// //   Cat: 0,
+// // };
+// //
+// // Animals[0];
+// //
+// // type CatOrDog = Animals.Cat | Animals.Dog;
+// //
+// // let animal: CatOrDog = Animals.Cat;
+// // let animal1: CatOrDog = Animals.Dog;
+// // let animal3: CatOrDog = 0;
