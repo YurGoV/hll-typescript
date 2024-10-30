@@ -1,4 +1,3 @@
-// NOTE: paused on: 1:37:30
 //
 //  NOTE: UNION
 //
