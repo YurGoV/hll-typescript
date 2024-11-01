@@ -1,4 +1,5 @@
-// Enum in blocks
+// NOTE: Enum in blocks
+//
 // class Test {
 //   constructor() {
 //     if (true) {
@@ -15,6 +16,8 @@
 //     Animal.Cat;
 //   }
 // }
+
+// NOTE: Objects
 
 // let obj: object = {};
 // let Obj: Object = {};
@@ -41,7 +44,8 @@
 // obj = undefined;
 // Obj = undefined;
 
-// ARRAY
+// NOTE: ARRAY
+//
 // const animals: string[] = ["Elephant", "Dog", "Cat"];
 // const otherAnimals: Array<string> = ["Elephant", "Dog", "Cat"];
 
@@ -67,7 +71,7 @@
 
 // const lionData = new Array('Simba', 1);
 
-// Tuple
+// NOTE: Tuple
 
 // const v0: [string, number] = ["test", 1];
 // const v1: [string, number] = [1, ''];
@@ -115,6 +119,8 @@
 // type T = [a: number, b: string];
 
 // const elephantData = ['Dambo', 1];
+
+// NOTE: FUNCTIONS
 
 // function f1(p1: number): string {
 //   return p1.toString();
